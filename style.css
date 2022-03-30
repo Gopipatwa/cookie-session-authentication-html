@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+    background: #191919;
+    color:#ECDBBA;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+input:not([type='file']){
+    border:1px solid transparent;
+    outline: none;
+    height: 30px;
+    padding: 1px 15px;
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,1);
+}
+input:focus{
+    border: 1px solid #C84B31;
+}
+button{
+    background: #C84B31;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    color: #ECDBBA;
+}
+form{
+    padding: 50px 50px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,1);
+}

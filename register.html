@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+
+<body>
+    
+    <form id="form" action="" method="post">
+        <h2 style="text-align: center;">Register</h2>
+        Name: <input type="text" name="name" id="name">
+        email: <input type="email" name="email" id="email">
+        password: <input type="password" name="password" id="password">
+        Image: <input type="file" name="img" id="img">
+        <br>
+        <button type="submit" id="submit">Submit</button>
+        <br>
+        <div class="clsbtn" style="text-align: center;color:beige">
+            <a href="./login.html" style="color:beige" >Login</a>
+        </div>
+    </form>
+    <script>
+        document.getElementById("submit").addEventListener("click", function (event) {
+            event.preventDefault()
+            let data = Array.from(document.querySelectorAll("#form input")).reduce((acc, input) =>
+            (
+                {
+                    ...acc, [input.id]: input.value
+                }), {});
+                // console.log(data);
+                if ((data.name||data.email||data.password)!=''){
+                    if (localStorage.getItem(data['email'])!=null){
+                        alert(data['email']+" this email already exist");
+                    }
+                    else{
+
+                        localStorage.setItem(data['email'],JSON.stringify(data));
+                        // sessionStorage.setItem("userauth",JSON.stringify(data));
+                        window.location.href = "http://127.0.0.1:5500/login.html";
+                    }
+                }
+
+                else{
+                    alert("Please enter valid input");
+                }
+            });
+    </script>
+    <script>
+        // let dta = localStorage.getItem("userauth");
+        let dta = sessionStorage.getItem("userauth");
+        if (dta==null){
+           
+        }else{
+            window.location.href = "http://127.0.0.1:5500/dashboard.html";
+            
+        }
+    </script>
+</body>
+
+</html>

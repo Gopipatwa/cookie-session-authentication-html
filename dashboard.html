@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            /* height: 80vh; */
+            justify-content: center;
+            align-items: center;
+            background: #191919;
+            color: #ECDBBA;
+        }
+
+        .cont {
+            max-width: 400px;
+        }
+
+        #name:hover {
+            color: red
+        }
+
+        /* Chat containers */
+        .container {
+            border: 2px solid #dedede;
+            background-color: #191919;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        /* Darker chat container */
+        .darker {
+            border-color: #ccc;
+            background-color: #191919;
+        }
+
+        /* Clear floats */
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Style images */
+        .container img {
+            float: left;
+            max-width: 60px;
+            width: 100%;
+            height: 70px;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        /* Style the right image */
+        .container img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right: 0;
+        }
+
+        /* Style time text */
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+        /* Style time text */
+        .time-left {
+            float: left;
+            color: #999;
+        }
+        .container:hover{
+            background: #C84B31;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contaner">
+        <div class="det">
+            <h2>Im Dashboard</h2>
+            <h3 id="name"></h3>
+            <h4 id="email"></h4>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <div class="cont">
+            <div class="container">
+                <img class="image" alt="Avatar">
+                <p>Hello. How are you today?</p>
+                <span class="time-right">11:00</span>
+            </div>
+
+            <div class="container darker">
+                <img class="image" alt="Avatar" class="right">
+                <p>Hey! I'm fine. Thanks for asking!</p>
+                <span class="time-left">11:01</span>
+            </div>
+
+            <div class="container">
+                <img class="image" alt="Avatar">
+                <p>Sweet! So, what do you wanna do today?</p>
+                <span class="time-right">11:02</span>
+            </div>
+
+            <div class="container darker">
+                <img class="image" alt="Avatar" class="right">
+                <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+                <span class="time-left">11:05</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        let name = document.getElementById("name");
+        let email = document.getElementById("email");
+        // data = localStorage.getItem("userauth");
+        const imag = document.querySelectorAll('img');
+        data = sessionStorage.getItem("userauth");
+        if (data == null) {
+            window.location.href = "http://127.0.0.1:5500/index.html";
+        } else {
+            name.innerText = JSON.parse(data).name;
+            email.innerText = JSON.parse(data).email;
+            let mg = JSON.parse(data).img;
+            console.log(mg);
+        //    document.getElementById("imgget").src=;
+        imag.forEach((d,i)=>{
+            d.src = "https://images.unsplash.com/photo-1648516096463-d2d90d5deab2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
+        })
+            console.log("user authenticated");
+        }
+        function logout() {
+            // localStorage.removeItem("userauth");
+            sessionStorage.removeItem("userauth");
+
+            window.location.href = "http://127.0.0.1:5500/login.html";
+        }
+    </script>
+</body>
+
+</html>

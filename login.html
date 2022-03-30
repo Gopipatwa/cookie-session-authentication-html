@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <form id="form" action="" method="post">
+        <h2 style="text-align: center;">Login</h2>
+        email: <input type="email" name="email" id="email">
+        password: <input type="password" name="password" id="password">
+        <br>
+        <button type="submit" id="submit">Submit</button>
+        <br>
+        <div class="clsbtn" style="text-align: center;color:beige">
+            <a href="./register.html" style="color:beige" >Register</a>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("submit").addEventListener("click", function (event) {
+            event.preventDefault()
+            let data = Array.from(document.querySelectorAll("#form input")).reduce((acc, input) =>
+            (
+                {
+                    ...acc, [input.id]: input.value
+                }), {});
+                // console.log(data);
+                if ((data.name||data.email||data.password)!=''){
+                    let user = localStorage.getItem(data['email']);
+                    if (data['email']===JSON.parse(user).email && data['password']===JSON.parse(user).password)
+                    {sessionStorage.setItem("userauth",user);
+                    window.location.href = "http://127.0.0.1:5500/dashboard.html";}
+                    else{
+                        alert("Please enter valid email or password");
+                    }
+                }
+                else{
+                    alert("Please enter valid input");
+                }
+            });
+    </script>
+</body>
+</html>
